@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<table width="100%">
 		<tr>
 			<td width="50%" align="left" valign="middle">
-				当前位置:<a href="admin/NewsTypeServlet">新闻类型管理</a> > <a href="admin/newsTypeAdd.jsp">新增新闻类型</a>
+				当前位置:<a href="admin/NewsTypeServlet">品牌类型管理</a> > <a href="admin/newsTypeAdd.jsp">新增品牌类型</a>
 			</td>
 			<td width="50%" align="right" valign="middle">
 				

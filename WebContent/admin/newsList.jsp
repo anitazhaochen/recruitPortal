@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新闻列表</title>
+<title>品列表</title>
 <link href="css/page.css" rel="stylesheet"/>
 <link href="css/common.css" rel="stylesheet"/>
 </head>
@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<table width="100%">
 		<tr>
 			<td width="50%" align="left" valign="middle">
-				当前位置:<a href="admin/NewsServlet">新闻管理</a>
+				当前位置:<a href="admin/NewsServlet">品牌管理</a>
 			</td>
 			<td align="right">
 				<a href="admin/NewsInitAdd">新增</a>
@@ -27,14 +27,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<hr>
 	<form action="admin/NewsServlet" method="post">
 		<p>
-			新闻标题:<input type="text" name="querytitle" value="${querytitle}"/> <input type="submit" value="查询"/>
+			品牌标题:<input type="text" name="querytitle" value="${querytitle}"/> <input type="submit" value="查询"/>
 		</p>
 	</form>
 	
 	<table width="100%" class="dataTable">
 		<thead>
 			<tr class="title">
-				<td>新闻标题</td>
+				<td>品牌标题</td>
 				<td width="100">类型</td>
 				<td width="100" align="center">发布时间</td>
 				<td width="100" align="center">截至时间</td>

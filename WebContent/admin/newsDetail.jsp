@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<table width="100%">
 		<tr>
 			<td width="50%" align="left" valign="middle">
-				当前位置:<a href="admin/NewsServlet">新闻管理</a> > <a href="admin/NewsDetail?newsID=${news['newsID']}">详细信息</a>
+				当前位置:<a href="admin/NewsServlet">品牌管理</a> > <a href="admin/NewsDetail?newsID=${news['newsID']}">详细信息</a>
 			</td>
 			<td width="50%" align="right" valign="middle">
 				
