@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+/*分页按钮的样式 */
+.page{
+  	margin-top:5px;
+	margin-bottom:5px;
+	/*-moz-border-radius: 3px;
+  	-webkit-border-radius: 3px;
+  	border-radius: 3px;*/
+  	border-top:1px solid #ddd;
+  	padding:10px 5px 10px 5px;
+  	text-align: left;
+}
+.page span{
+
+	margin-right:3px;
+	cursor: pointer;
+	
+	
+}
+/*当前页的样式 */
+.page span a.currentPage{
+	background: #7CCD7C;
+}
+
+.page span a{
+	border:1px solid #ddd;
+	padding:5px;
+ 	background: #fff;
+ 	text-decoration: none;
+ 	color:#000;
+ }
+ 
+.page span a:hover{
+ 	border:1px solid #ddd;
+	padding:5px;
+ 	background: #eee;
+ 	color:#EE9A49;
+}
+
+
