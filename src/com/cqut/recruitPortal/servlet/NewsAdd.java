@@ -2,6 +2,7 @@ package com.cqut.recruitPortal.servlet;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -56,28 +57,48 @@ public class NewsAdd extends HttpServlet {
 		
 		Long operatorID = ((Operator)request.getSession().getAttribute("loginOperator")).getOperatorID();
 		
-		Date publishTime = new Date();
-		
+		Date date = new Date();
+		java.text.SimpleDateFormat sdf =
+				new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String publishTime = sdf.format(date);
+//        Date publishTime = new Date();
+
+
+
 		Date deadLineTime = null;
-		
-		if(deadLine!=null && !deadLine.equals("")){
-			try {
-				deadLineTime = SysUtil.praseDate(deadLine);
-				if(deadLineTime.getTime()<publishTime.getTime()){
-					isOK = false;
-					deadLineMessage = "截至时间不能小于当前时间";
-				}
-			} catch (ParseException e) {
-				isOK = false;
-				deadLineMessage = "截至时间格式不正确，应为:2014-01-14 22:51:10";
-				e.printStackTrace();
-			}
-		}
-		
+
+//		if(deadLine!=null && !deadLine.equals("")){
+//			try {
+//				deadLineTime = SysUtil.praseDate(deadLine);
+//				if(deadLineTime.getTime()<publishTime.getTime()){
+//					isOK = false;
+//					deadLineMessage = "截至时间不能小于当前时间";
+//				}
+//			} catch (ParseException e) {
+//				isOK = false;
+//				deadLineMessage = "截至时间格式不正确，应为:2014-01-14 22:51:10";
+//				e.printStackTrace();
+//			}
+//		}
+
 		String addMessage = "";
 		if(isOK){
-			String sql = "insert into news(`title`,`content`,`type`,`publishTime`,`deadLine`,`count`,`operator`,`status`) values(?,?,?,?,?,?,?,?)";
-			Object objs[]={title,content,Long.parseLong(type),publishTime,deadLineTime,0,operatorID,1};
+//			String sql = "insert into news(`title`,`content`,`type`,`publishTime`,deadLine`,`count`,`operator`,`status`) values(?,?,?,?,?,?,?,?)";
+			String sql = "insert into news(`title`,`content`,`type`,`publishTime`,`count`,`operator`,`status`) values(?,?,?,?,?,?,?)";
+//			Object objs[]={title,content,Long.parseLong(type),publishTime,deadLineTime,0,operatorID,1};
+//			Object objs[]={title,content,Long.parseLong(type),publishTime,0,operatorID,1};
+			Object objs[]={title,content,Long.parseLong(type),publishTime,0,operatorID,1};
+			System.out.println("title");
+			System.out.println(title);
+			System.out.println("content");
+			System.out.println(content);
+			System.out.println("type");
+			System.out.println(type);
+			System.out.println("deadLine");
+			System.out.println(deadLine);
+			System.out.println("operatorID");
+			System.out.println(operatorID);
+
 			int updateCount = service.cd.executeUpdate(sql, objs);
 			if(updateCount!=1){
 				addMessage = "新增失败";

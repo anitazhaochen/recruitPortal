@@ -23,7 +23,7 @@ import java.util.Map;
 public class CommonDAO {
 	
 	//数据URL
-	private static final String url = "jdbc:mysql://localhost:3306/recruitPortal?Unicode=true&characterEncoding=UTF-8";
+	private static final String url = "jdbc:mysql://localhost:3306/recruitPortal?Unicode=true&characterEncoding=UTF-8&useSSL=false";
 	
 	//用户名
 	private static final String username = "root";
@@ -122,6 +122,8 @@ public class CommonDAO {
         	con.setAutoCommit(false);
         	//创建PreparedStatement对象
 			stmt = con.prepareStatement(sql);
+			System.out.println("1111111111111111");
+			System.out.println(stmt==null);
 			//填充Statement的参数
 			fillStatement(stmt,params);
 			System.out.println("SQL:"+sql+"; Parameters:"+Arrays.deepToString(params));
@@ -181,8 +183,13 @@ public class CommonDAO {
 			return;
 		}
 
+		System.out.println(params.toString());
+		System.out.println(params.length);
 		for (int i = 0; i < params.length; i++) {
 			if (params[i] != null) {
+				System.out.println("iiiiiiiiii");
+				System.out.println(i+1);
+				System.out.println(params[i]);
 				stmt.setObject(i + 1, params[i]);
 			} else {
 				int sqlType = Types.VARCHAR;

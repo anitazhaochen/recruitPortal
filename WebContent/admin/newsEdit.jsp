@@ -54,13 +54,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</td>
 				</tr>
 				
-				<tr>
-					<td width="100px" align="right" valign="top">截至时间</td>
-					<td>
-						<input type="text" name="deadLine" value="${news['deadLine']}" style="width:50%;"/><span style="margin-top:5px;"> 格式为:2014-01-15 00:20:17</span><br/>
-						<font color='red'>${deadLineMessage}</font>
-					</td>
-				</tr>
+				<%--<tr>--%>
+					<%--<td width="100px" align="right" valign="top">截至时间</td>--%>
+					<%--<td>--%>
+						<%--<input type="text" name="deadLine" value="${news['deadLine']}" style="width:50%;"/><span style="margin-top:5px;"> 格式为:2014-01-15 00:20:17</span><br/>--%>
+						<%--<font color='red'>${deadLineMessage}</font>--%>
+					<%--</td>--%>
+				<%--</tr>--%>
 				
 				<tr>
 					<td width="100px" align="right" valign="top"><font color="red">*</font>新闻内容</td>
