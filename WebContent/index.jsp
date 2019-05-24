@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 			<td><a href="Index?actionType=detail&newsID=<%=news.get("newsID")%>"><%=news.get("title")%></a></td>
 			<td>
-				<img src="http://pic32.nipic.com/20130823/13339320_183302468194_2.jpg" style="width:50px; height: 50px" >
+				<img src="<%=news.get("img")%>" style="width:120px; height: 80px" >
 			</td>
 		</tr>
         <%

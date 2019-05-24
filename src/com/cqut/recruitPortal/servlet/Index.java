@@ -175,8 +175,8 @@ public class Index extends HttpServlet {
 				"n.`deadLine` AS deadLine, " +
 				"n.`count` AS count, " +
 				"n.`type` AS type, " +
-				"n.`status` AS status "+
-				"n.`img` AS img, " +
+				"n.`status` AS status, "+
+				"n.`img` AS img " +
 				"from news n LEFT JOIN newstype AS nt ON n.type = nt.newsTypeID " +
 				"LEFT JOIN operator AS o ON o.operatorID = n.operator " +
 				"where "+condition+" (n.deadLine>NOW() or n.deadLine IS NULL) and n.`status` = 2 " +
