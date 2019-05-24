@@ -31,7 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</table>
 	<hr/>
 	
-	<form action="admin/NewsAdd" method="post">
+
+
+	<form action="admin/NewsAdd" method="post"  enctype="multipart/form-data">>
 		<table width="100%" class="formTable">
 			<tbody>
 				<tr>
@@ -39,13 +41,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<font color="red">*</font>品牌标题
 					</td>
 					<td>
+						<input type="text" name="timestamp" hidden="true" value="${timestamp}"/>
 						<input type="text" name="title" value="${title}" style="width:100%;"/>
 						<c:if test="${not empty titleMessage}">
 							<font color="red">${titleMessage}</font>
 						</c:if>
 					</td>
 				</tr>
-				
+
+
+				<tr>
+					<td width="100px" align="right" valign="top">
+						<font color="red">*</font>品牌LOGO
+					</td>
+					<td>
+						<input type="file" name="fileName"/>
+						<font color='red'>${contentMessage}</font>
+					</td>
+				</tr>
+
 				<tr>
 					<td width="100px" align="right">
 						<font color="red">*</font>品牌类型
@@ -54,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						${phtml}<font color='red'>${typeMessage}</font>
 					</td>
 				</tr>
-				
+				<%----%>
 				<%--<tr>--%>
 					<%--<td width="100px" align="right" valign="top">截止招商时间</td>--%>
 					<%--<td>--%>
@@ -62,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<%--<font color='red'>${deadLineMessage}</font>--%>
 					<%--</td>--%>
 				<%--</tr>--%>
-				
+				<%----%>
 				<tr>
 					<td width="100px" align="right" valign="top">
 						<font color="red">*</font>品牌介绍

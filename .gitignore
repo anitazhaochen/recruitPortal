@@ -6,4 +6,5 @@ build/
 out/
 .classpath
 
+WebContent/image/.DS_Store
 

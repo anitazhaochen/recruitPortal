@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>品牌查询平台， 欢饮你</title>
 <link href="css/front.css" rel="stylesheet"/>
+
 </head>
 <body>
 
@@ -42,6 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			品牌关键字:<input type="text" name="title"/><input type="hidden" name="actionType" value="indexQuery"/><input type="submit" value="查询">
 		</p>
 	</form>
+
 	<hr>
 	<!--在页面上分类展示页面系统所有类型的新闻  -->
 	<%
@@ -54,7 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<table width="100%">
 			<thead>
 				<tr>
-					<td width="70%">标题</td>
+					<td width="30%">标题</td>
+					<td width="40%">品牌LOGO</td>
 					<td width="30%">发布时间</td>
 				</tr>
 			</thead>
@@ -65,6 +68,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 		<td><a href="Index?actionType=detail&newsID=<%=news.get("newsID")%>"><%=news.get("title")%></a></td>
 		<td>
+			<%
+				if(news.get("img")!=null)
+				{
+			%>
+			<img src="<%=news.get("img")%>" style="width:120px; height: 80px" >
+			<%
+				}
+			%>
+		</td>
+		<td>
+
+
 			<%
 			if(news.get("publishTime")!=null)
 			{
@@ -83,6 +98,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<%
 	}
 	%>
-	
+
+	<%--<p class="newsType">最近浏览 <a href="Index?actionType=newsTypeQuery&newsType=">更多</a></p>--%>
+	<p class="newsType">最近浏览</p>
+	<table width="100%">
+		<thead>
+		<tr>
+			<td width="30%">标题 </td>
+			<td width="40%">品牌LOGO </td>
+			<td width="30%">发布时间</td>
+		</tr>
+		</thead>
+		<%
+            Set<Long>  set = new HashSet<>();
+			ArrayList<Map<String, Object>> listMap1 = (ArrayList<Map<String, Object>>) session.getAttribute("news_list");
+			if (listMap1 != null) {
+			for(Map<String,Object> news :listMap1){
+				System.out.println(news.get("newsID"));
+			    if (set.contains(news.get("newsID"))){
+			    	continue;
+				}
+		%>
+		<tr>
+			<td><a href="Index?actionType=detail&newsID=<%=news.get("newsID")%>"><%=news.get("title")%></a></td>
+			<td>
+				<img src="http://pic32.nipic.com/20130823/13339320_183302468194_2.jpg" style="width:50px; height: 50px" >
+			</td>
+		</tr>
+        <%
+					set.add((Long) news.get("newsID"));
+			}	}%>
+	</table>
+
 </body>
 </html>

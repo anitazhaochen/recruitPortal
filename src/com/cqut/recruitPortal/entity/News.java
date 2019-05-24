@@ -21,7 +21,18 @@ public class News implements Serializable {
 	private java.lang.Long operator;
 
 	private java.lang.Long type;
-	
+
+	private java.lang.String img;
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+
 	//新闻状态 1.新建 2.已发布 3.取消发布
 	private int status;
 

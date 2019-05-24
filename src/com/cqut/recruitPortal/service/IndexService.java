@@ -31,6 +31,7 @@ public class IndexService {
 				"n.`title` AS title, " +
 				"n.`publishTime` AS publishTime, " +
 				"n.`deadLine` AS deadLine, " +
+				"n.`img` AS img ,"+
 				"n.`count` AS count, " +
 				"n.`operator` AS operator, " +
 				"n.`type` AS type, " +

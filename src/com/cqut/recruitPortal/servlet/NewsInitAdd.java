@@ -1,6 +1,7 @@
 package com.cqut.recruitPortal.servlet;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,9 +36,11 @@ public class NewsInitAdd extends HttpServlet {
 		
 		String phtml=  service.createOperationPermissionHtml("", operatorID);
 		request.setAttribute("phtml",phtml);
+
+		long time = new Date().getTime();
+		request.setAttribute("timestamp", time);
 		
-		//
-		
+
 		request.getServletContext().getRequestDispatcher("/admin/newsAdd.jsp").forward(request, response);
 		
 		

@@ -1,6 +1,7 @@
 package com.cqut.recruitPortal.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,9 @@ public class Index extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String newsID = request.getParameter("newsID");
-		
+
+
+
 		//更新该新闻的浏览数量
 		String updateCountSql = "update news set `count`=`count`+1 where newsID=?";
 		service.cd.executeUpdate(updateCountSql, new Object[]{Long.parseLong(newsID)});
@@ -78,7 +81,8 @@ public class Index extends HttpServlet {
 				"nt.`name` AS typeName, " +
 				"o.`name` AS operatorName, " +
 				"n.`content` AS content, " +
-				"n.`status` AS status "+
+				"n.`status` AS status, "+
+				"n.`img` AS img "+
 				"from news n LEFT JOIN newstype AS nt ON n.type = nt.newsTypeID " +
 				"LEFT JOIN operator AS o ON o.operatorID = n.operator where newsID=?";  
 		List<Map<String,Object>> listMap = service.cd.executeQuery(sql, new Object[]{Long.parseLong(newsID)});  
@@ -102,6 +106,16 @@ public class Index extends HttpServlet {
 			news.put("content", content);
 			
 			request.setAttribute("news", news);
+
+			// 最近浏览
+			ArrayList<Map<String, Object>> news_list = (ArrayList<Map<String, Object>>) request.getSession().getAttribute("news_list");
+			if (news_list == null) {
+				news_list = new ArrayList<Map<String, Object>>();
+			}
+			news_list.add(0,news);
+			request.getSession().setAttribute("news_list", news_list);
+
+			request.getServletContext().getRequestDispatcher("/newsDetail.jsp").forward(request, response);
 			
 			//设置面包屑导航栏
 			String newsType = request.getParameter("newsType");
@@ -119,8 +133,8 @@ public class Index extends HttpServlet {
 				request.setAttribute("titleLink", titleLink);
 			}
 		}
-		
-		request.getServletContext().getRequestDispatcher("/newsDetail.jsp").forward(request, response);
+
+
 		
 	}
 
@@ -162,6 +176,7 @@ public class Index extends HttpServlet {
 				"n.`count` AS count, " +
 				"n.`type` AS type, " +
 				"n.`status` AS status "+
+				"n.`img` AS img, " +
 				"from news n LEFT JOIN newstype AS nt ON n.type = nt.newsTypeID " +
 				"LEFT JOIN operator AS o ON o.operatorID = n.operator " +
 				"where "+condition+" (n.deadLine>NOW() or n.deadLine IS NULL) and n.`status` = 2 " +
