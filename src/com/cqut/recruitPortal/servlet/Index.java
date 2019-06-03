@@ -15,12 +15,7 @@ import com.cqut.recruitPortal.dto.NewsTypeNews;
 import com.cqut.recruitPortal.service.IndexService;
 
 /**
-* 项目名称：recruitPortal
-* 类名称：Index
-* 类描述：这个类负责处理首页请求，也就是 当在浏览器地址栏输入http://localhost:8080/recruitPortal/ 会跳转到这个Servlet   
-* 修改备注：   
-* @version 1.0
-* Copyright (c) 2014 ChongQing University Of Technology
+* 类描述：这个类负责处理首页请求，也就是 当在浏览器地址栏输入http://localhost:8080/recruitPortal/ 会跳转到这个Servlet
  */
 
 public class Index extends HttpServlet {
@@ -43,6 +38,7 @@ public class Index extends HttpServlet {
 		if(actionType==null || actionType.equals("")){
 			List<NewsTypeNews> list = service.pageInit();
 			request.setAttribute("list", list);
+			request.getSession().setAttribute("category_list", list);
 			request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 		}
 		//首页上的查询
@@ -55,10 +51,16 @@ public class Index extends HttpServlet {
 		}
 		else if(actionType.equals("detail")){
 			detailHander(request,response);
+		}else if (actionType.equals("recent")){
+			recentHander(request, response);
 		}
 		
 	}
-	
+
+	private void recentHander(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getServletContext().getRequestDispatcher("/indexRecent.jsp").forward(request, response);
+	}
+
 	private void detailHander(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -174,9 +176,9 @@ public class Index extends HttpServlet {
 				"n.`publishTime` AS publishTime, " +
 				"n.`deadLine` AS deadLine, " +
 				"n.`count` AS count, " +
+				"n.`img` AS img, " +
 				"n.`type` AS type, " +
-				"n.`status` AS status, "+
-				"n.`img` AS img " +
+				"n.`status` AS status "+
 				"from news n LEFT JOIN newstype AS nt ON n.type = nt.newsTypeID " +
 				"LEFT JOIN operator AS o ON o.operatorID = n.operator " +
 				"where "+condition+" (n.deadLine>NOW() or n.deadLine IS NULL) and n.`status` = 2 " +
@@ -235,6 +237,7 @@ public class Index extends HttpServlet {
 				"n.`deadLine` AS deadLine, " +
 				"n.`count` AS count, " +
 				"n.`operator` AS operator, " +
+				"n.`img` AS img, " +
 				"n.`type` AS type, " +
 				"nt.`name` AS typeName, " +
 				"o.`name` AS operatorName, " +

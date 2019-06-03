@@ -14,7 +14,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>品牌网站</title>
+<title>品牌系统门户网站</title>
+<link href="css/page.css" rel="stylesheet"/>
+<link href="css/font.css" rel="stylesheet"/>
 	<link href="bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet"/>
 	<link href="bootstrap-3.3.7/css/bootstrap-theme.css" rel="stylesheet"/>
 	<style>
@@ -27,9 +29,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div class="row">
 	<%
-		if(request.getAttribute("list")!=null){
-			List<Map<String,Object>> list = (List<Map<String,Object>>)request.getAttribute("list");
-			for(Map<String,Object> news:list){
+		Set<Long>  set = new HashSet<>();
+		ArrayList<Map<String, Object>> listMap1 = (ArrayList<Map<String, Object>>) session.getAttribute("news_list");
+		if (listMap1 != null) {
+			for(Map<String,Object> news :listMap1){
+				if (set.contains(news.get("newsID"))){
+					continue;
+				}
 	%>
 	<div class="col-xs-6 col-md-3">
 		<a href="Index?actionType=detail&newsID=<%=news.get("newsID")%>" class="thumbnail">
@@ -38,9 +44,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</a>
 	</div>
 	<%
-			}
-		}
-	%>
+				set.add((Long) news.get("newsID"));
+			}	}%>
+
 </div>
 
 

@@ -68,15 +68,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						${phtml}<font color='red'>${typeMessage}</font>
 					</td>
 				</tr>
-				<%----%>
-				<%--<tr>--%>
-					<%--<td width="100px" align="right" valign="top">截止招商时间</td>--%>
-					<%--<td>--%>
-						<%--<input type="text" name="deadLine" value="${deadLine}" style="width:50%;" maxlength="200"/><span style="margin-top:5px;"> 格式为:2014-01-15 00:20:17</span><br/>--%>
-						<%--<font color='red'>${deadLineMessage}</font>--%>
-					<%--</td>--%>
-				<%--</tr>--%>
-				<%----%>
 				<tr>
 					<td width="100px" align="right" valign="top">
 						<font color="red">*</font>品牌介绍

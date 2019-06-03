@@ -17,78 +17,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>品牌系统门户网站</title>
 <link href="css/page.css" rel="stylesheet"/>
 <link href="css/font.css" rel="stylesheet"/>
-<style type="text/css">
-
-</style>
+	<link href="bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet"/>
+	<link href="bootstrap-3.3.7/css/bootstrap-theme.css" rel="stylesheet"/>
+	<style>
+		body {background-image:url('image/backgroud.jpg');}
+	</style>
 </head>
 <body>
 
-	<h1 style="margin:0;padding:0;">品牌系统门户网站</h1>
-	<!-- 把表单的请求交给后台的一个url-pattern 为 IndexQuerySerlvet 的 Servlet去处理，这个Servlet的详细配置在web.xml
-	里面
-	  <servlet>
-	    <description></description>
-	    <display-name>IndexQuerySerlvet</display-name> 
-	    <servlet-name>IndexQuerySerlvet</servlet-name> //这是servlet 的名字
-	    <servlet-class>com.cqut.recruitPortal.servlet.IndexQuerySerlvet</servlet-class> //这个Servlet对应的java代码
-	  </servlet>
-	  
-	  servlet 和 servlet-mapping是相对应的，一个Servlet可以有0-n个Servlet-mapping
-	  
-	  <servlet-mapping>
-	    <servlet-name>IndexQuerySerlvet</servlet-name>
-	    <url-pattern>/IndexQuerySerlvet</url-pattern> //前台可以访问的路径
-	  </servlet-mapping>
-	 -->
-	 
-	<div class="pageContent">
-		<p>
-			<a href="Index">首页</a>
-		</p>
-		<form action="Index" method="post">
-			<p>
-				标题:<input type="text" name="title" value="<%=request.getAttribute("title")%>"/><input type="hidden" name="actionType" value="indexQuery"/><input type="submit" value="查询">
-			</p>
-		</form>
-		<hr>
-		<!-- 写这个是一种煎熬 -->
-		<table width="100%">
-			<thead>
-				<tr>
-					<td width="70%">标题</td>
-					<td width="30%">发布时间</td>
-				</tr>
-			</thead>
-			<tbody>
-			
-			<%
-			
-			if(request.getAttribute("list")!=null){
-				List<Map<String,Object>> list = (List<Map<String,Object>>)request.getAttribute("list");
-				for(Map<String,Object> m:list){
-			%>
-				<tr>
-					<td><a href="Index?actionType=detail&newsID=<%=m.get("newsID")%>"><%=m.get("title")%></a></td>
-					<td>
-					<%
-					if(m.get("publishTime")!=null)
-					{
-					%>
-						<%=SysUtil.formatDate((Date)m.get("publishTime")) %>
-					<%
-					} 
-					%>
-					</td>
-				</tr>
-				
-			<%
-				}
-			}
-			%>
-			</tbody>
-		</table>
-		<div class="page"><%=request.getAttribute("paginationHtml")%></div>
+<jsp:include page="header.jsp"></jsp:include>
+
+
+<div class="row">
+	<%
+		if(request.getAttribute("list")!=null){
+			List<Map<String,Object>> list = (List<Map<String,Object>>)request.getAttribute("list");
+			for(Map<String,Object> news:list){
+	%>
+	<div class="col-xs-6 col-md-3">
+		<a href="Index?actionType=detail&newsID=<%=news.get("newsID")%>" class="thumbnail">
+			<img src="<%=news.get("img")%>" alt="<%=news.get("title")%>" style="height: 180px; width: 100%; display: block;" >
+			<%=news.get("title")%>
+		</a>
 	</div>
-	
+	<%
+			}
+		}
+	%>
+</div>
+
 </body>
 </html>
